@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body{
+            background-color: bisque;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        td{
+            padding: 5px;
+        }
+        #comment{
+            width: 200px;
+            height: 0.1px;
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>BMI Calculator</h1>
+    <form>
+        <table>
+            <tr><td>Weight:</td><td><input type="number" id="Weight"></td>
+                <td>
+                <select id="WeightUnit">
+                    <option value="pounds">pounds</option>
+                    <option value="Kilograms">Kilograms</option>
+                    </select></td>
+                </tr>
+            <tr><td>Height:</td><td><input type="number" id="Height"></td>
+                <td>
+                <select id="HeightUnit">
+                    <option value="inches">inches</option>
+                    <option value="Centimeter">Centimeter</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                <input type="button" value="Calculate" onclick="calculateBMI()">
+                <input type="reset" value="Clear"></td>
+            </tr>
+            <tr>
+                <td >Result:</td>
+                <td><input type="number" id="bmivalue" readonly></td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td colspan="4" id="comments"><input type="text" id="comment" readonly></td>
+            </tr>
+        </table>
+    </form>
+</center>
+<script>
+    function calculateBMI()
+    {
+        let weight=parseFloat(document.getElementById("Weight").value);
+        let height=parseFloat(document.getElementById("Height").value);
+        let weightUnit=document.getElementById("WeightUnit").value;
+        let heightUnit=document.getElementById("HeightUnit").value;
+        if(weightUnit=="pounds" && heightUnit=="inches")
+        {
+            var BMIinPounds=(weight/(height*height))*703;
+            document.getElementById("bmivalue").value=BMIinPounds;
+        }
+        if(weightUnit=="Kilograms" && heightUnit=="Centimeter")
+        {
+            let heightm=height/100;
+            var BMIinKgs=weight/(heightm*heightm);
+            document.getElementById("bmivalue").value=BMIinKgs.toFixed(3);
+        }
+        if(BMIinPounds<18.5||BMIinKgs<18.5)
+        {
+            var classification="You are Underweight";
+        }
+        if((BMIinPounds>=18.5 && BMIinPounds<25)||(BMIinKgs>=18.5 && BMIinKgs<25))
+        {
+            classification="You are healthy";
+        }
+        if((BMIinPounds>=25 && BMIinPounds<30)||(BMIinKgs>=25 && BMIinKgs<30))
+        {
+            classification="You are Overweight";
+        }
+        else{
+            classification="You are obese";
+        }
+        document.getElementById("comment").value=classification;
+
+    }
+</script>
+</body>
+</html>
