@@ -63,24 +63,24 @@
         let heightUnit=document.getElementById("HeightUnit").value;
         if(weightUnit=="pounds" && heightUnit=="inches")
         {
-            var BMIinPounds=(weight/(height*height))*703;
-            document.getElementById("bmivalue").value=BMIinPounds;
+            var BMI=(weight/(height*height))*703;
+            document.getElementById("bmivalue").value=BMI.toFixed(2);
         }
-        if(weightUnit=="Kilograms" && heightUnit=="Centimeter")
+        else if(weightUnit=="Kilograms" && heightUnit=="Centimeter")
         {
             let heightm=height/100;
-            var BMIinKgs=weight/(heightm*heightm);
-            document.getElementById("bmivalue").value=BMIinKgs.toFixed(3);
+            var BMI=weight/(heightm*heightm);
+            document.getElementById("bmivalue").value=BMI.toFixed(2);
         }
-        if(BMIinPounds<18.5||BMIinKgs<18.5)
+        if(BMI<18.5)
         {
             var classification="You are Underweight";
         }
-        if((BMIinPounds>=18.5 && BMIinPounds<25)||(BMIinKgs>=18.5 && BMIinKgs<25))
+        else if((BMI>=18.5 && BMI<25)
         {
             classification="You are healthy";
         }
-        if((BMIinPounds>=25 && BMIinPounds<30)||(BMIinKgs>=25 && BMIinKgs<30))
+        else if((BMI>=25 && BMI<30)
         {
             classification="You are Overweight";
         }
